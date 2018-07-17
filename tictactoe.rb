@@ -94,7 +94,7 @@ class Game
     @positions = {
         :A1 => [0,0],
         :A2 => [0,1],
-0        :A3 => [0,2],
+        :A3 => [0,2],
         :B1 => [1,0],
         :B2 => [1,1],
         :B3 => [1,2],
@@ -148,7 +148,7 @@ class Game
                 # On verifie si le joueur O gagne
                 if @plateau.game_over("O") # Si oui, on arrete le jeux et le joueur O gagne
                     tour = 10
-                    @j2.victory = true
+                    @gamer2.victory = true
                 else
                     tour += 1 # Sinon, on passe au tour suivant
                 end
@@ -164,7 +164,7 @@ class Game
 
                 # Tant que la case n'est pas vide on l'invite a choisir une autre case
                 while @plateau.verify_case(@positions[p.upcase.to_sym]) != " "  do
-                    puts "Cette position est deja prise #{@j1.name.capitalize}, veuillez resaisir:" 
+                    puts "Cette position est deja prise #{@gamer1.name.capitalize}, veuillez resaisir:" 
                     p = gets.chomp
                 end
 
@@ -174,7 +174,7 @@ class Game
                 # On verifie si le joueur X gagne
                 if @plateau.game_over("X")# Si oui, on arrete le jeux et le joueur X gagne
                     tour = 10
-                    @j1.victory = true
+                    @gamer1.victory = true
                 else
                     tour += 1 # Sinon, on passe au tour suivant
                 end
@@ -185,20 +185,21 @@ class Game
         @plateau.view_board
     
         # On check ce qui a gagne ou si c'etait un match nul
-        if @j1.victory == true
+        if @gamer1.victory == true
             puts "Bravo #{@gamer1.name.upcase}! T'as gagné !!!!"
-         elsif @j2.victory == true
+         elsif @gamer2.victory == true
             puts "Bravo #{@gamer2.name.upcase}! T'as gagné !!!!"
         elseclass Board_case
         attr_accessor :status
             def initialize(status=" ")
                 @status = status
             end
-            puts "Match nul!!!!!"
+        else
+             puts "Match nul!!!!!"
         end
 
         # On invite les joueurs a faire une autre partie
-        puts "\n\nFaire une revenche?\n1- Oui\n2- Non"
+        puts "\n\nFaire une revenche?\n-Tappe 1 si Oui\n-Tappe 2 si Non"
         v = gets.chomp
         quit = false
         while quit != true do
@@ -207,7 +208,7 @@ class Game
             elsif v == "2"
                 quit = true
                 rematch = false
-                puts "Merci d'etre passe !!! :)"
+                puts "thanks for playing with Tic Tac Toe! :)"
             else
                 quit = false
                 puts "\n\nTapez:\n1- Pour recommencer\n2- Pour quitter"
